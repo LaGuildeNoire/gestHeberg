@@ -11,5 +11,6 @@
 |
 */
 
-Route::get('/', 'ContractController@connection');
+Route::get('/', 'ContractController@login');
 Route::get('/index', 'ContractController@index');
+Route::post('/connect', 'ContractController@connect');

@@ -13,12 +13,35 @@ class ContractController extends Controller
      */
     public function index()
     {
-        return view('contracts.index');
+        /**
+         * Si id user = 1 (SISR), alors : 
+         * return view('gestHeberg.contract');
+         * Sinon */
+        return view('gestHeberg.index');
     }
 
-    public function connection()
+    /**
+     * Form where users give a login and a password
+     */
+    public function login()
     {
-        return view('contracts.connection');
+        return view('gestHeberg.login');
+    }
+
+    public function connect($login, $password)
+    {
+        $user = Users::where('login', '=', $login)->where('password', '=', $password);
+        
+        if($user[0] == 1)
+        {
+            return redirect('/index');
+        }
+        elseif ($user > 1) 
+        {
+            return redirect('/index')/*->with($user)*/;
+        }
+    
+        return redirect('/');
     }
 
     /**

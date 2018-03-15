@@ -7,11 +7,11 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>
-    Signin Template for Bootstrap
+    Gestionnaire d'hébergement
     </title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/signin/">
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
     <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/DD526E5A-A296-1044-AE2E-1BB7ECA43364/main.js" charset="UTF-8">
@@ -27,18 +27,18 @@
   </head>
   <body class="body">
     <div class="container">
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <form class="form-signin" method="POST" action="/connect">
+        <h2 class="form-signin-heading">Vous connecter</h2>
+        <label for="inputEmail">Identifiant : </label>
+        <input type="login" id="inputLogin" class="form-control" required autofocus>
+        <label for="inputPassword">Mot de passe</label>
+        <input type="password" id="inputPassword" class="form-control" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me"> Se souvenir de moi
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
       </form>
     </div>
     <!-- /container -->
