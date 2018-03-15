@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'ContractController@connection');
+Route::get('/index', 'ContractController@index');
