@@ -16,9 +16,11 @@
         <link href="css/dashboard.css" rel="stylesheet">
         <script type="text/javascript" src="http://gc.kis.v2.scr.kaspersky-labs.com/DD526E5A-A296-1044-AE2E-1BB7ECA43364/main.js" charset="UTF-8"></script>
     </head>
+
     <body>
         
-        @include ('layouts.header')
+            @include ('layouts.headerSISR')
+        
         
         <div class="container-fluid">
             <div class="row">

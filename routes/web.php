@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', 'ContractController@login');
-Route::get('/index', 'ContractController@index');
-Route::post('/connect', 'ContractController@connect');
+Route::get('/', 'ContractController@login')->name('login');
+Route::get('/index', 'ContractController@index')->name('index');
+Route::post('/', 'ContractController@connect')->name('gestHeberg.login');
+
+// Dans la section client rajouté une liste avec recherche pour modifier les clients choisi
+// Les clients on accès : à leur contrat / l'envoie de message au SISR et le support Technique
+// Pour les amendements (modification): le client propose et le SISR valide

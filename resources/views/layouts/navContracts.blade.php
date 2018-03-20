@@ -5,16 +5,6 @@
     </li>
     <hr>
     <li class="nav-item">
-      <a class="nav-link" href="#">Nouveau Contrat</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Nouveau Type de Contrats</a>
-    </li>
-    <hr>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Contrats En Attente</a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" href="#">Archives</a>
     </li>
   </ul>

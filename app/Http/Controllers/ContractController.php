@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Users;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class ContractController extends Controller
 {
@@ -25,23 +29,39 @@ class ContractController extends Controller
      */
     public function login()
     {
-        return view('gestHeberg.login');
+        return view('login');
     }
 
-    public function connect($login, $password)
+    public function connect(Request $request)
     {
-        $user = Users::where('login', '=', $login)->where('password', '=', $password);
+        $login = $request->input("inputLogin");
+        $password = $request->input("inputPassword");
+
+        $user = Users::select(["login", "password"])
+            ->where("login", "=", $request->input("inputLogin"))
+            ->where("password", "=", hash("sha1", $request->input("inputPassword")))
+            ->first();
+
+        if ($user)
+        {
+            Session::put("User", $user);
+            return redirect(route("index"));
+        }
         
-        if($user[0] == 1)
-        {
-            return redirect('/index');
-        }
-        elseif ($user > 1) 
-        {
-            return redirect('/index')/*->with($user)*/;
-        }
+        return redirect(route("login"));
+
+        // $user = Users::where('login', '=', $login)->where('password', '=', $password);
+        
+        // if($user[0] == 1)
+        // {
+        //     return redirect('/index');
+        // }
+        // elseif ($user > 1) 
+        // {
+        //     return redirect('/index')/*->with($user)*/;
+        // }
     
-        return redirect('/');
+        // return redirect('/');
     }
 
     /**
