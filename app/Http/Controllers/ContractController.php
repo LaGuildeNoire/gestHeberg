@@ -19,7 +19,7 @@ class ContractController extends Controller
     {
         /**
          * Si id user = 1 (SISR), alors : 
-         * return view('gestHeberg.contract');
+         * return view('gestHebergAdmin.index');
          * Sinon */
         return view('gestHeberg.index');
     }
