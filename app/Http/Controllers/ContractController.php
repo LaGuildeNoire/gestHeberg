@@ -37,7 +37,7 @@ class ContractController extends Controller
         $login = $request->input("inputLogin");
         $password = $request->input("inputPassword");
 
-        $user = Users::select(["login", "password"])
+        $user = Users::select(["id", "login", "password"])
             ->where("login", "=", $request->input("inputLogin"))
             ->where("password", "=", hash("sha1", $request->input("inputPassword")))
             ->first();
