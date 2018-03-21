@@ -6,13 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Gestion Contrats<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/contracts">Gestion Contrats<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Gestion Clients</a>
+        <a class="nav-link" href="/users">Gestion Clients</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Support Technique</a>
+        <a class="nav-link" href="/support">Support Technique</a>
       </li>
       {{-- <li class="nav-item">
         <a class="nav-link" href="#"></a>

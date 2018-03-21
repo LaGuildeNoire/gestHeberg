@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Mes Contrats<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="../index">Mes Contrats<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Support Technique</a>
+        <a class="nav-link" href="../support">Support Technique</a>
       </li>
       {{-- <li class="nav-item">
         <a class="nav-link" href="#"></a>

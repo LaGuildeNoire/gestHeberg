@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('layouts-Admin.master')
 
 @section('navbar')
-@include('layouts.navContracts')
+@include('layouts-Admin.navContracts')
 @endsection
 
 @section('content')
-<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+
   <h1>Contrats</h1>
   {{-- <section class="row text-center placeholders">
     <div class="col-6 col-sm-3 placeholder">

@@ -12,7 +12,11 @@
 */
 
 Route::get('/', 'ContractController@login')->name('login');
-Route::get('/index', 'ContractController@index')->name('index');
+Route::get('/contracts', 'ContractController@index')->name('contracts');
+Route::get('/support', 'ContractController@support')->name('support');
+Route::get('/users', 'ContractController@users')->name('users');
+
+
 Route::post('/', 'ContractController@connect')->name('gestHeberg.login');
 
 // Dans la section client rajouté une liste avec recherche pour modifier les clients choisi

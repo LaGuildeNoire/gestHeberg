@@ -17,11 +17,15 @@ class ContractController extends Controller
      */
     public function index()
     {
-        /**
-         * Si id user = 1 (SISR), alors : 
-         * return view('gestHebergAdmin.index');
-         * Sinon */
-        return view('gestHeberg.index');
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.index');
+        }
+        elseif ($user)
+        {
+            return view('gestHeberg.index');
+        }
     }
 
     /**
@@ -45,23 +49,34 @@ class ContractController extends Controller
         if ($user)
         {
             Session::put("User", $user);
-            return redirect(route("index"));
+            return redirect(route("contracts"));
         }
         
         return redirect(route("login"));
+    }
 
-        // $user = Users::where('login', '=', $login)->where('password', '=', $password);
-        
-        // if($user[0] == 1)
-        // {
-        //     return redirect('/index');
-        // }
-        // elseif ($user > 1) 
-        // {
-        //     return redirect('/index')/*->with($user)*/;
-        // }
-    
-        // return redirect('/');
+    public function users()
+    {
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.users');
+        }
+        return redirect(route("login"));
+    }
+
+    public function support()
+    {
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.support');
+        }
+        elseif ($user)
+        {
+            return view('gestHeberg.support');
+        }
+        return redirect(route("login"));
     }
 
     /**
