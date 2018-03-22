@@ -60,7 +60,7 @@ class ContractController extends Controller
         $user=Session::get("User");
         if ($user['id']==1) 
         {
-            return view('gestHebergAdmin.users');
+            return view('gestHebergAdmin.users.users');
         }
         return redirect(route("login"));
     }
@@ -70,7 +70,7 @@ class ContractController extends Controller
         $user=Session::get("User");
         if ($user['id']==1) 
         {
-            return view('gestHebergAdmin.support');
+            return view('gestHebergAdmin.support.support');
         }
         elseif ($user)
         {
