@@ -21,9 +21,9 @@ Route::get('/contracts/newContract', 'ContractController@newContract')->name('ne
 Route::get('/contracts/newType', 'ContractController@newType')->name('newType');
 Route::get('/contracts/old', 'ContractController@old')->name('archives');
 
+Route::post('/contracts/newContract', 'ContractController@createContract')->name('gestHeberg.newContract');
+Route::post('/contracts/newType', 'ContractController@createType')->name('gestHeberg.newType');
 
-Route::post('/contracts/newContract', 'ContractController@newContract')->name('gestHeberg.newContract');
-Route::post('/contracts/newType', 'ContractController@newType')->name('gestHeberg.newType');
 
 Route::get('/support', 'ContractController@support')->name('support');
 Route::get('/support/message', 'ContractController@message')->name('message');

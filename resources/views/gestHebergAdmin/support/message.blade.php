@@ -1,7 +1,7 @@
 @extends('layouts-Admin.master')
 
 @section('navbar')
-@include('layouts-Admin.navUsers')
+@include('layouts.navSupport')
 @endsection
 
 @section('content')
