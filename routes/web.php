@@ -12,12 +12,24 @@
 */
 
 Route::get('/', 'ContractController@login')->name('login');
-Route::get('/contracts', 'ContractController@index')->name('contracts');
-Route::get('/support', 'ContractController@support')->name('support');
-Route::get('/users', 'ContractController@users')->name('users');
-
 
 Route::post('/', 'ContractController@connect')->name('gestHeberg.login');
+
+
+Route::get('/contracts', 'ContractController@index')->name('contracts');
+Route::get('/contracts/newContract', 'ContractController@newContract')->name('newContract');
+
+
+Route::post('/contracts/newContract', 'ContractController@newContract')->name('gestHeberg.newContract');
+
+Route::get('/support', 'ContractController@support')->name('support');
+Route::get('/support/message', 'ContractController@message')->name('message');
+
+
+Route::get('/users', 'ContractController@users')->name('users');
+Route::get('/users/waitList', 'ContractController@waitList')->name('waitList');
+
+
 
 // Dans la section client rajouté une liste avec recherche pour modifier les clients choisi
 // Les clients on accès : à leur contrat / l'envoie de message au SISR et le support Technique
