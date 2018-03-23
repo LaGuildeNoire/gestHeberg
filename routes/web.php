@@ -19,7 +19,7 @@ Route::post('/', 'ContractController@connect')->name('gestHeberg.login');
 Route::get('/contracts', 'ContractController@index')->name('contracts');
 Route::get('/contracts/newContract', 'ContractController@newContract')->name('newContract');
 Route::get('/contracts/newType', 'ContractController@newType')->name('newType');
-Route::get('/contracts/old', 'ContractController@old')->name('archives');
+Route::get('/contracts/archives', 'ContractController@archives')->name('archives');
 
 Route::post('/contracts/newContract', 'ContractController@createContract')->name('gestHeberg.newContract');
 Route::post('/contracts/newType', 'ContractController@createType')->name('gestHeberg.newType');

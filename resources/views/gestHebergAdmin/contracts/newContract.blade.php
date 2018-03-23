@@ -6,7 +6,7 @@
 <h1>Test 2</h1>
 <form class="" method="POST" action="{{ route("gestHeberg.newContract") }}">
 	{{ csrf_field() }}
-	
+
 	<label>Client :</label>
 	<select name="user">
 		@foreach($users as $user)
@@ -30,6 +30,9 @@
 	<hr>
 	<label>Prix :</label>
 	<input type="" name="price">
+	<br>
+	<label>Date de fin :</label>
+	<input type="" name="dateFin" value="aaaa-mm-jj">
 	<hr>
 	<button type="submit">Créer le contrat</button>
 </form>

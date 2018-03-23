@@ -5,7 +5,7 @@
 		</li>
 		<hr>
 		<li class="nav-item">
-			<a class="nav-link" href="../contracts/old">Archives</a>
+			<a class="nav-link" href="../contracts/archives">Archives</a>
 		</li>
 	</ul>
 </nav>

@@ -109,9 +109,9 @@ class ContractController extends Controller
         return redirect(route("newType"));
     }
 
-    public function old()
+    public function archives()
     {
-        return view('gestHebergAdmin.contracts.newType');
+        return view('gestHebergAdmin.contracts.archives');
     }
 
 
