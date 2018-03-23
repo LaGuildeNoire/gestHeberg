@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Users;
+use App\ContractType;
+use App\Contracts;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
@@ -21,10 +23,11 @@ class ContractController extends Controller
 
     public function connect(Request $request)
     {
-        $login = $request->input("inputLogin");
-        $password = $request->input("inputPassword");
+        // $login = $request->input("inputLogin");
+        // $password = $request->input("inputPassword");
 
         $user = Users::select(["id", "login", "password"])
+            ->where("validate", "=", "YES")
             ->where("login", "=", $request->input("inputLogin"))
             ->where("password", "=", hash("sha1", $request->input("inputPassword")))
             ->first();
@@ -59,12 +62,30 @@ class ContractController extends Controller
 
     public function newContract()
     {
-        return view('gestHebergAdmin.contracts.newContract');
+        $users = Users::where("validate", "=", "YES")->get();
+        $types = ContractType::get();
+
+        return view('gestHebergAdmin.contracts.newContract', ['users' => $users], ['types' => $types]);
     }
 
-    public function createContract()
+    public function createContract(Request $request)
     {
+        $num = Contracts::count("numero");
+        $num += 1;
 
+        $contract = new Contracts;
+
+        $contract->numero = $num;
+        $contract->idDemandeur = $request->input("user");
+        $contract->title = $request->input("title");
+        $contract->libelle = $request->input("libelle");
+        $contract->prix = $request->input("price");
+        $contract->idTypeContrat = $request->input("contractType");
+        $contract->dateFin = $request->input("dateFin");
+
+        $contract->save();
+
+        return redirect(route("newContract"));
     }
 
     public function newType()
@@ -72,9 +93,20 @@ class ContractController extends Controller
         return view('gestHebergAdmin.contracts.newType');
     }
 
-    public function createType()
+    public function createType(Request $request)
     {
+        $num = ContractType::count("id");
+        $num += 1;
 
+        $type = new ContractType;
+
+        $type->id = $num;
+        $type->nom = $request->input("name");
+        $type->libelle = $request->input("libelle");
+
+        $type->save();
+
+        return redirect(route("newType"));
     }
 
     public function old()
