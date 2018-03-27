@@ -50,18 +50,27 @@ class ContractController extends Controller
     public function index()
     {
         $user=Session::get("User");
-        $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
-            ->where("dateDebut", "<", date(now()))
+        
+
+        if ($user['id']==1) 
+        {
+            $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateFin", ">", date(now()))
             ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
             ->join('users', "users.id", "=", "idDemandeur")
             ->get();
 
-        if ($user['id']==1) 
-        {
             return view('gestHebergAdmin.index', ['contracts' => $contracts]);
         }
         elseif ($user)
         {
+            $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateFin", ">", date(now()))
+            ->where("users.id", "=", $user["id"])
+            ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
+            ->join('users', "users.id", "=", "idDemandeur")
+            ->get();
+
             return view('gestHeberg.index', ['contracts' => $contracts]);
         }
 
@@ -73,7 +82,7 @@ class ContractController extends Controller
         $user=Session::get("User");
         if ($user['id']==1) 
         {
-            $users = Users::where("validate", "=", "YES")->get();
+            $users = Users::where("validate", "=", "YES")->where("id", ">", 1)->get();
             $types = ContractType::get();
 
             return view('gestHebergAdmin.contracts.newContract', ['users' => $users], ['types' => $types]);
@@ -87,7 +96,7 @@ class ContractController extends Controller
         $user=Session::get("User");
         if ($user['id']==1) 
         {
-            $num = Contracts::count("numero");
+            $num = Contracts::where("idDemandeur", "=", $request->input("user"))->count("idDemandeur");
             $num += 1;
 
             $contract = new Contracts;
@@ -98,6 +107,7 @@ class ContractController extends Controller
             $contract->libelle = $request->input("libelle");
             $contract->prix = $request->input("price");
             $contract->idTypeContrat = $request->input("contractType");
+            $contract->dateDebut = date(now());
             $contract->dateFin = $request->input("dateFin");
 
             $contract->save();
@@ -144,18 +154,26 @@ class ContractController extends Controller
     public function archives()
     {
         $user=Session::get("User");
-        $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
-            ->where("dateDebut", ">=", date(now()))
+
+        if ($user['id']==1) 
+        {
+            $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateFin", "<=", date(now()))
             ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
             ->join('users', "users.id", "=", "idDemandeur")
             ->get();
 
-        if ($user['id']==1) 
-        {
             return view('gestHebergAdmin.contracts.archives', ['contracts' => $contracts]);
         }
         elseif ($user)
         {
+            $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateFin", "<=", date(now()))
+            ->where("users.id", "=", $user["id"])
+            ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
+            ->join('users', "users.id", "=", "idDemandeur")
+            ->get();
+
             return view('gestHeberg.archives', ['contracts' => $contracts]);
         }
 
