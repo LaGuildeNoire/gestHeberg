@@ -17,6 +17,7 @@
       <tr>
         <th>N°</th>
         <th>Client</th>
+        <th>Titre</th>
         <th>Début</th>
         <th>Fin</th>
         <th>Prix</th>
@@ -24,14 +25,17 @@
       </tr>
     </thead>
     <tbody>
+      @foreach($contracts as $contract)
       <tr>
-        <td>1,001</td>
-        <td>Lorem</td>
-        <td>ipsum</td>
-        <td>dolor</td>
-        <td>sit</td>
-        <td>dd</td>
+        <td>{{ $contract->numero }}</td>
+        <td>{{ $contract->demName }} {{ $contract->demSurname }}</td>
+        <td>{{ $contract->title }}</td>
+        <td>{{ $contract->dateDebut }}</td>
+        <td>{{ $contract->dateFin }}</td>
+        <td>{{ $contract->prix }}</td>
+        <td>{{ $contract->type }}</td>
       </tr>
+      @endforeach
     </tbody>
   </table>
 </div>

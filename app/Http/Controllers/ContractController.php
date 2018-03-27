@@ -50,69 +50,118 @@ class ContractController extends Controller
     public function index()
     {
         $user=Session::get("User");
+        $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateDebut", "<", date(now()))
+            ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
+            ->join('users', "users.id", "=", "idDemandeur")
+            ->get();
+
         if ($user['id']==1) 
         {
-            return view('gestHebergAdmin.index');
+            return view('gestHebergAdmin.index', ['contracts' => $contracts]);
         }
         elseif ($user)
         {
-            return view('gestHeberg.index');
+            return view('gestHeberg.index', ['contracts' => $contracts]);
         }
+
+        return redirect(route('login'));
     }
 
     public function newContract()
     {
-        $users = Users::where("validate", "=", "YES")->get();
-        $types = ContractType::get();
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            $users = Users::where("validate", "=", "YES")->get();
+            $types = ContractType::get();
 
-        return view('gestHebergAdmin.contracts.newContract', ['users' => $users], ['types' => $types]);
+            return view('gestHebergAdmin.contracts.newContract', ['users' => $users], ['types' => $types]);
+        }
+
+        return redirect(route('login'));
     }
 
     public function createContract(Request $request)
     {
-        $num = Contracts::count("numero");
-        $num += 1;
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            $num = Contracts::count("numero");
+            $num += 1;
 
-        $contract = new Contracts;
+            $contract = new Contracts;
 
-        $contract->numero = $num;
-        $contract->idDemandeur = $request->input("user");
-        $contract->title = $request->input("title");
-        $contract->libelle = $request->input("libelle");
-        $contract->prix = $request->input("price");
-        $contract->idTypeContrat = $request->input("contractType");
-        $contract->dateFin = $request->input("dateFin");
+            $contract->numero = $num;
+            $contract->idDemandeur = $request->input("user");
+            $contract->title = $request->input("title");
+            $contract->libelle = $request->input("libelle");
+            $contract->prix = $request->input("price");
+            $contract->idTypeContrat = $request->input("contractType");
+            $contract->dateFin = $request->input("dateFin");
 
-        $contract->save();
+            $contract->save();
 
-        return redirect(route("newContract"));
+            return redirect(route("newContract"));
+        }
+
+        return redirect(route('login'));
     }
 
     public function newType()
     {
-        return view('gestHebergAdmin.contracts.newType');
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.contracts.newType');
+        }
+
+        return redirect(route('login'));
     }
 
     public function createType(Request $request)
     {
-        $num = ContractType::count("id");
-        $num += 1;
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            $num = ContractType::count("id");
+            $num += 1;
 
-        $type = new ContractType;
+            $type = new ContractType;
 
-        $type->id = $num;
-        $type->nom = $request->input("name");
-        $type->libelle = $request->input("libelle");
+            $type->id = $num;
+            $type->nom = $request->input("name");
+            $type->libelle = $request->input("libelle");
 
-        $type->save();
+            $type->save();
 
-        return redirect(route("newType"));
+            return redirect(route("newType"));
+        }
+
+        return redirect(route('login'));
     }
 
     public function archives()
     {
-        return view('gestHebergAdmin.contracts.archives');
+        $user=Session::get("User");
+        $contracts=Contracts::select(["numero", "name AS demName", "surname AS demSurname", "title", "prix", "nom AS type", "dateDebut", "dateFin"])
+            ->where("dateDebut", ">=", date(now()))
+            ->join('contract_types', "contract_types.id", "=", 'idTypeContrat')
+            ->join('users', "users.id", "=", "idDemandeur")
+            ->get();
+
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.contracts.archives', ['contracts' => $contracts]);
+        }
+        elseif ($user)
+        {
+            return view('gestHeberg.archives', ['contracts' => $contracts]);
+        }
+
+        return redirect(route('login'));
     }
+
 
 
     public function users()
@@ -122,12 +171,19 @@ class ContractController extends Controller
         {
             return view('gestHebergAdmin.users.users');
         }
+
         return redirect(route("login"));
     }
 
     public function waitList()
     {
-        return view('gestHebergAdmin.users.waitingList');
+         $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.users.waitingList');
+        }
+
+        return redirect(route('login'));
     }
 
 
@@ -142,11 +198,22 @@ class ContractController extends Controller
         {
             return view('gestHeberg.support');
         }
+
         return redirect(route("login"));
     }
 
     public function message()
     {
-        return view('gestHebergAdmin.support.message');
+        $user=Session::get("User");
+        if ($user['id']==1) 
+        {
+            return view('gestHebergAdmin.support.message');
+        }
+        elseif ($user)
+        {
+            return view('gestHeberg.message');
+        }
+
+        return redirect(route("login"));
     }
 }
